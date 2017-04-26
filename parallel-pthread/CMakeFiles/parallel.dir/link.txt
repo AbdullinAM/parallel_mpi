@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++14    CMakeFiles/parallel.dir/main.cpp.o  -o parallel -rdynamic -lpthread 

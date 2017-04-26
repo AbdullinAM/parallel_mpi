@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++14    CMakeFiles/parallel.dir/main.cpp.o  -o parallel -rdynamic /usr/lib/openmpi/lib/libmpi_cxx.so /usr/lib/openmpi/lib/libmpi.so -Wl,-rpath,/usr/lib/openmpi/lib 

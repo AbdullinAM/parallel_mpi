@@ -1,0 +1,3 @@
+/home/kivi/workspace/parallel/parallel-mpi/CMakeFiles/rebuild_cache.dir
+/home/kivi/workspace/parallel/parallel-mpi/CMakeFiles/edit_cache.dir
+/home/kivi/workspace/parallel/parallel-mpi/CMakeFiles/parallel.dir

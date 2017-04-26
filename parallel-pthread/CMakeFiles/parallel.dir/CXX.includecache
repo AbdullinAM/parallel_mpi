@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kivi/workspace/parallel/parallel-pthread/Timer.h
+iostream
+-
+chrono
+-
+
+/home/kivi/workspace/parallel/parallel-pthread/main.cpp
+iostream
+-
+fstream
+-
+limits
+-
+random
+-
+string
+-
+vector
+-
+pthread.h
+-
+Timer.h
+/home/kivi/workspace/parallel/parallel-pthread/Timer.h
+

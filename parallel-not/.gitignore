@@ -1,0 +1,8 @@
+CMakeCache.txt
+CMakeFiles/*
+cmake_install.cmake  
+.idea/*
+input*
+Makefile
+parallel
+

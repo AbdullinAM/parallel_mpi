@@ -37,6 +37,9 @@ for proc in [1, 2, 4, 8]:
 	else:
 		disp = disp / (numRepeats - 1)
 
+	maxError = 2.58 * ((disp / numRepeats) ** (1.0 / 2.0))
+
 	print("{} threads: average = {}, dispersion = {}".format(proc, av, disp))
+	print("99% interval: {} +- {}".format(av, maxError))
 
 print("Average area = {}".format(allAreas / (4 * numRepeats)))

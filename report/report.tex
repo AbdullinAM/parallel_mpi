@@ -400,8 +400,7 @@ programm = args[1]
 inputFile = args[2]
 numRepeats = int(args[3])
 
-#run programm
-
+#run program
 allAreas = 0.0
 for proc in [1, 2, 4, 8]:
 	times = []
@@ -426,7 +425,10 @@ for proc in [1, 2, 4, 8]:
 	else:
 		disp = disp / (numRepeats - 1)
 
+	maxError = 2.58 * ((disp / numRepeats) ** (1.0 / 2.0))
+
 	print("{} threads: average = {}, dispersion = {}".format(proc, av, disp))
+	print("99% interval: {} +- {}".format(av, maxError))
 
 print("Average area = {}".format(allAreas / (4 * numRepeats)))
 \end{lstlisting}
@@ -439,25 +441,77 @@ M=\frac{\sum_{i}{x_i}}{n}
 D=\frac{1}{n - 1} {\sum_{i}{(x_i - M)^2}}
 \end{equation*}
 
+По оценкам мат. ожидания и дисперсии вычисляется 99\% доверительный интервал для времени работы программы. Доверительный интервал вычисляется по следующей формуле:
+\begin{equation*}
+I = M \pm t_{\alpha} \sqrt{\frac{D}{n}}
+\end{equation*}
+
+В данной формуле $t_{\alpha}$ --- это критерий Стьюдента для вероятности $\alpha$. При $\alpha = 0.99$, $t_{\alpha} = 2.58$. 
+
 Так же данный скрипт выводит вычисленную среднюю площадь фигуры.
 
-Запуск каждой программы был повторен 100 раз. Результаты экспериментов вы можете видеть в таблицах \ref{tab:input1} -- \ref{tab:input3}. Красным цветом выделены наиболее эффективные результаты.
+Запуск каждой программы был повторен 100 раз. Результаты экспериментов вы можете видеть в таблицах \ref{tab:input1} -- \ref{tab:input3}.
 
-\begin{table}
+\begin{table}[h!]
 \caption{Результаты на первом наборе данных}
-\center{\includegraphics[scale=1]{input1}}
+
+\center
+\begin{tabular}{|r|c|c|c|}
+\hline 
+\textbf{Кол-во потоков} & \textbf{Однопоточная} & \textbf{PThread} & \textbf{MPI} \\ 
+\hline 
+\textbf{1} & $0.39714 \pm 0.0008$ & $0.3699 \pm 0.0027$ & $0.3719 \pm 0.0008$ \\ 
+\hline 
+\textbf{2} & ---                  & $0.1912 \pm 0.0018$ & $0.2025 \pm 0.0013$ \\ 
+\hline 
+\textbf{4} & ---                  & \boldmath$0.1002 \pm 0.0017$ & $0.1246 \pm 0.0024$ \\ 
+\hline 
+\textbf{8} & ---                  & $0.1067 \pm 0.0011$ & $0.1727 \pm 0.0052$ \\ 
+\hline 
+\end{tabular} 
+
 \label{tab:input1}
 \end{table}
 
-\begin{table}
+\begin{table}[h!]
 \caption{Результаты на втором наборе данных}
-\center{\includegraphics[scale=1]{input2}}
+
+\center
+\begin{tabular}{|r|c|c|c|}
+\hline 
+\textbf{Кол-во потоков} & \textbf{Однопоточная} & \textbf{PThread} & \textbf{MPI} \\ 
+\hline 
+\textbf{1} & $0.4002 \pm 0.0018$ & $0.3906 \pm 0.0029$ & $0.4139 \pm 0.0036$ \\ 
+\hline 
+\textbf{2} & ---                 & $0.2021 \pm 0.0016$ & $0.2276 \pm 0.0041$ \\ 
+\hline 
+\textbf{4} & ---                 & \boldmath$0.1097 \pm 0.0022$ & $0.1329 \pm 0.0031$ \\ 
+\hline 
+\textbf{8} & ---                 & $0.1143 \pm 0.0017$ & $0.1816 \pm 0.0051$ \\ 
+\hline 
+\end{tabular}
+
 \label{tab:input2}
 \end{table}
 
-\begin{table}
+\begin{table}[h!]
 \caption{Результаты на третьем наборе данных}
-\center{\includegraphics[scale=1]{input3}}
+
+\center
+\begin{tabular}{|r|c|c|c|}
+\hline 
+\textbf{Кол-во потоков} & \textbf{Однопоточная} & \textbf{PThread} & \textbf{MPI} \\ 
+\hline 
+\textbf{1} & $0.4791 \pm 0.0025$ & $0.4762 \pm 0.0047$ & $0.4920 \pm 0.0025$ \\ 
+\hline 
+\textbf{2} & ---                 & $0.2650 \pm 0.0040$ & $0.2654 \pm 0.0034$ \\ 
+\hline 
+\textbf{4} & ---                 & $0.1456 \pm 0.0036$ & $0.1514 \pm 0.0023$ \\ 
+\hline 
+\textbf{8} & ---                 & \boldmath$0.1348 \pm 0.0014$ & $0.2030 \pm 0.0057$ \\ 
+\hline 
+\end{tabular}
+
 \label{tab:input3}
 \end{table}
 
